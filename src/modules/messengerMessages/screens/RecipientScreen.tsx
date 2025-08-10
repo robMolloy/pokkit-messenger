@@ -1,13 +1,12 @@
 import { MainFixedLayout, Scroll } from "@/components/layout/Layout";
-import { H1 } from "@/components/ui/defaultComponents";
 import { pb } from "@/config/pocketbaseConfig";
 import { useUsersStore } from "@/modules/users/usersStore";
 import { useCurrentUserStore } from "@/stores/authDataStore";
 import { useState } from "react";
+import { ChatMessage } from "../ChatMessage";
 import { createMessengerMessageRecord } from "../dbMessengerMessagesUtils";
 import { useMessengerMessageRecordsStore } from "../messengerMessagesStore";
 import { MessengerMessageTextarea } from "../MessengerMessageTextarea";
-import { ChatMessage } from "../ChatMessage";
 
 const useRecipientWithMessengerMessages = (p: { recipientId: string }) => {
   const currentUserStore = useCurrentUserStore();
@@ -46,8 +45,6 @@ export const RecipientScreen = (p: { recipientId: string }) => {
   const [text, setText] = useState("");
   return (
     <MainFixedLayout>
-      <H1>Scrolling page with fixed items</H1>
-
       {(() => {
         if (recipientWithMessengerMessages.status === "loading") return <div>loading</div>;
         if (recipientWithMessengerMessages.status === "error") return <div>error</div>;
@@ -66,27 +63,29 @@ export const RecipientScreen = (p: { recipientId: string }) => {
                 />
               ))}
             </Scroll>
-            <MessengerMessageTextarea
-              value={text}
-              onInput={(x) => setText(x)}
-              disabled={isLoading}
-              onSubmit={async () => {
-                if (isLoading) return;
+            <div className="p-2 pt-0">
+              <MessengerMessageTextarea
+                value={text}
+                onInput={(x) => setText(x)}
+                disabled={isLoading}
+                onSubmit={async () => {
+                  if (isLoading) return;
 
-                setIsLoading(true);
-                const resp = await createMessengerMessageRecord({
-                  pb,
-                  data: {
-                    text,
-                    senderId: recipientWithMessengerMessages.data.currentUser.id,
-                    recipientId: recipientWithMessengerMessages.data.recipient.id,
-                  },
-                });
-                setIsLoading(false);
+                  setIsLoading(true);
+                  const resp = await createMessengerMessageRecord({
+                    pb,
+                    data: {
+                      text,
+                      senderId: recipientWithMessengerMessages.data.currentUser.id,
+                      recipientId: recipientWithMessengerMessages.data.recipient.id,
+                    },
+                  });
+                  setIsLoading(false);
 
-                if (resp.success) setText("");
-              }}
-            />
+                  if (resp.success) setText("");
+                }}
+              />
+            </div>
           </>
         );
       })()}
