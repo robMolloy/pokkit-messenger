@@ -31,7 +31,7 @@ const DisplayUser = (p: { user: TUser }) => {
   );
 };
 
-export const UsersScreen = () => {
+export const ContactsScreen = () => {
   const usersStore = useUsersStore();
   return (
     <MainLayout>
