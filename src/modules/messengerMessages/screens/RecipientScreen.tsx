@@ -60,7 +60,7 @@ export const RecipientScreen = (p: { recipientId: string }) => {
               {messages.map((x) => (
                 <ChatMessage
                   key={x.id}
-                  message={x.text}
+                  message={x}
                   user={x.senderId === currentUser.id ? currentUser : recipient}
                   isOwnMessage={x.senderId === currentUser.id}
                 />
