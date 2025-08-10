@@ -1,8 +1,10 @@
 import { MainLayout } from "@/components/layout/Layout";
 import { H1 } from "@/components/ui/defaultComponents";
 import { useUsersStore } from "@/modules/users/usersStore";
+import { useRouter } from "next/router";
 
 export const RecipientsScreen = () => {
+  const router = useRouter();
   const usersStore = useUsersStore();
   return (
     <MainLayout>
@@ -13,7 +15,9 @@ export const RecipientsScreen = () => {
         return (
           <div className="flex flex-col gap-2">
             {usersStore.data.map((x) => (
-              <div key={x.id}>{x.name}</div>
+              <div key={x.id} onClick={() => router.push(`/message/${x.id}`)}>
+                {x.name}
+              </div>
             ))}
           </div>
         );
