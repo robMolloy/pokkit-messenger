@@ -115,6 +115,13 @@ export function LeftSidebar() {
           <SidebarButton href="/" iconName="Home" isHighlighted={router.pathname === "/"}>
             Home
           </SidebarButton>
+          <SidebarButton
+            href="/messages"
+            iconName="Mail"
+            isHighlighted={router.pathname === "/messages"}
+          >
+            Messages
+          </SidebarButton>
         </>
       }
       middle={<></>}
