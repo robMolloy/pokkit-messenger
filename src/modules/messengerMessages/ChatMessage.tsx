@@ -13,9 +13,7 @@ export const ChatMessage = (p: {
         <div
           className={cn(
             "rounded-lg px-4 py-2",
-            p.isOwnMessage
-              ? "bg-blue-500 text-white"
-              : "bg-secondary text-gray-900 dark:bg-gray-700 dark:text-gray-100",
+            p.isOwnMessage ? "bg-blue-500 text-white" : "bg-secondary",
           )}
         >
           <div className="whitespace-pre-wrap break-words text-sm">{p.message}</div>
