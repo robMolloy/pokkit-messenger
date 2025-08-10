@@ -2,32 +2,43 @@ import { Header } from "./Header";
 import { LeftSidebar } from "./LeftSidebar";
 import { Modal } from "../Modal";
 
+export const PreserveScrollAbility = (p: {
+  children: React.ReactNode;
+  className?: HTMLDivElement["className"];
+}) => <div className={`flex h-full flex-col ${p.className ?? ""}`}>{p.children}</div>;
+
+export const Scroll = (p: {
+  children: React.ReactNode;
+  className?: HTMLDivElement["className"];
+}) => <div className={`flex-1 overflow-y-auto ${p.className ?? ""}`}>{p.children}</div>;
+
 export const MainLayout = (p: {
   children: React.ReactNode;
-  padding?: boolean;
-  fillPageExactly?: boolean;
+  className?: HTMLDivElement["className"];
 }) => {
-  const padding = p.padding ?? true;
-  return (
-    <div className={`${p.fillPageExactly ? "h-full" : "min-h-full"} ${padding ? "p-6" : ""}`}>
-      {p.children}
-    </div>
-  );
+  return <div className={`p-6 ${p.className ?? ""}`}>{p.children}</div>;
+};
+export const MainFixedLayout = (p: { children: React.ReactNode }) => {
+  return <PreserveScrollAbility>{p.children}</PreserveScrollAbility>;
 };
 
-export function Layout(p: { children: React.ReactNode; showLeftSidebar: boolean }) {
+export const Layout = (p: { children: React.ReactNode; showLeftSidebar: boolean }) => {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="flex h-screen max-h-screen flex-col">
       <Header />
-      <div className="flex flex-1">
+
+      <div className="flex flex-1 overflow-hidden">
         {p.showLeftSidebar && (
-          <aside className="min-h-full w-96 overflow-y-auto border-r">
+          <PreserveScrollAbility className="w-64">
             <LeftSidebar />
-          </aside>
+          </PreserveScrollAbility>
         )}
-        <main className="min-h-full w-full overflow-y-auto">{p.children}</main>
+
+        <PreserveScrollAbility className="flex-1 overflow-y-auto">
+          {p.children}
+        </PreserveScrollAbility>
       </div>
       <Modal />
     </div>
   );
-}
+};
