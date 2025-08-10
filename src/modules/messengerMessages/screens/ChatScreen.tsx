@@ -8,7 +8,7 @@ import { createMessengerMessageRecord } from "../dbMessengerMessagesUtils";
 import { useMessengerMessageRecordsStore } from "../messengerMessagesStore";
 import { MessengerMessageTextarea } from "../MessengerMessageTextarea";
 
-const useRecipientWithMessengerMessages = (p: { recipientId: string }) => {
+const useRecipientWithMessengerMessages = (p: { contactId: string }) => {
   const currentUserStore = useCurrentUserStore();
   const usersStore = useUsersStore();
   const messengerMessagesStore = useMessengerMessageRecordsStore();
@@ -23,21 +23,22 @@ const useRecipientWithMessengerMessages = (p: { recipientId: string }) => {
   if (usersStore.data === undefined) return { status: "loading" } as const;
   if (usersStore.data === null) return { status: "error" } as const;
 
-  const recipient = usersStore.data.find((x) => x.id === p.recipientId);
+  const recipient = usersStore.data.find((x) => x.id === p.contactId);
   if (recipient === undefined) return { status: "error" } as const;
 
   if (messengerMessagesStore.data === undefined) return { status: "loading" } as const;
   if (messengerMessagesStore.data === null) return { status: "error" } as const;
 
   const messages = messengerMessagesStore.data.filter(
-    (x) => x.recipientId === p.recipientId || x.senderId === p.recipientId,
+    (x) => x.recipientId === p.contactId || x.senderId === p.contactId,
   );
 
   return { status: "success", data: { currentUser, recipient, messages } } as const;
 };
-export const RecipientScreen = (p: { recipientId: string }) => {
+
+export const ChatScreen = (p: { contactId: string }) => {
   const recipientWithMessengerMessages = useRecipientWithMessengerMessages({
-    recipientId: p.recipientId,
+    contactId: p.contactId,
   });
 
   const [isLoading, setIsLoading] = useState(false);

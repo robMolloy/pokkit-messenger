@@ -9,7 +9,7 @@ const DisplayUser = (p: { user: TUser }) => {
   return (
     <Link
       key={p.user.id}
-      href={`/message/${p.user.id}`}
+      href={`/chat/${p.user.id}`}
       className="flex gap-4 rounded border p-4 hover:bg-secondary"
     >
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-xl">
