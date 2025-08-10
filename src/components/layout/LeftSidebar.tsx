@@ -116,11 +116,11 @@ export function LeftSidebar() {
             Home
           </SidebarButton>
           <SidebarButton
-            href="/messages"
-            iconName="Mail"
-            isHighlighted={router.pathname === "/messages"}
+            href="/contacts"
+            iconName="Users"
+            isHighlighted={router.pathname === "/contacts"}
           >
-            Messages
+            Contacts
           </SidebarButton>
         </>
       }

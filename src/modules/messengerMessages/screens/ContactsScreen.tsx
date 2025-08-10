@@ -4,11 +4,12 @@ import { H1 } from "@/components/ui/defaultComponents";
 import { useUsersStore } from "@/modules/users/usersStore";
 import Link from "next/link";
 
-export const RecipientsScreen = () => {
+export const UsersScreen = () => {
   const usersStore = useUsersStore();
   return (
     <MainLayout>
-      <H1>Recipients screen</H1>
+      <H1>Contacts</H1>
+      <br />
       {(() => {
         if (usersStore.data === undefined) return <div>loading</div>;
         if (usersStore.data === null) return <div>error</div>;
