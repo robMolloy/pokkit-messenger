@@ -1,6 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import { pb } from "@/config/pocketbaseConfig";
 import { AuthForm } from "@/modules/auth/AuthForm";
+import { smartSubscribeToMessengerMessageRecords } from "@/modules/messengerMessages/dbMessengerMessagesUtils";
+import { useMessengerMessageRecordsStore } from "@/modules/messengerMessages/messengerMessagesStore";
 import { smartSubscribeToUsers, subscribeToUser } from "@/modules/users/dbUsersUtils";
 import { useUsersStore } from "@/modules/users/usersStore";
 import { AwaitingApprovalScreen } from "@/screens/AwaitingApprovalScreen";
@@ -67,6 +69,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const themeStore = useThemeStore();
   const usersStore = useUsersStore();
   const currentUserStore = useCurrentUserStore();
+  const messengerMessageRecordsStore = useMessengerMessageRecordsStore();
 
   themeStore.useThemeStoreSideEffect();
 
@@ -74,6 +77,11 @@ export default function App({ Component, pageProps }: AppProps) {
     onIsLoading: () => {},
     onIsLoggedIn: () => {
       smartSubscribeToUsers({ pb, onChange: (x) => usersStore.setData(x) });
+      smartSubscribeToMessengerMessageRecords({
+        pb,
+        onChange: (x) => messengerMessageRecordsStore.setData(x),
+        onError: () => {},
+      });
     },
     onIsLoggedOut: () => {},
   });
@@ -86,7 +94,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout
         showLeftSidebar={
           currentUserStore.data.authStatus === "loggedIn" &&
-          ["approved", "admin"].includes(currentUserStore.data.user.status)
+          currentUserStore.data.user.status === "approved"
         }
       >
         {(() => {
