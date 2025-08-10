@@ -2,11 +2,15 @@ import { PocketBase } from "@/config/pocketbaseConfig";
 import { RecordFullListOptions } from "pocketbase";
 import { z } from "zod";
 
+type TCollectionRecordFormData<T extends { id: string }> = Partial<
+  Omit<T, "collectionId" | "collectionName" | "id" | "created" | "updated">
+>;
+
 export const createCollectionRecord = async <TSchema extends z.ZodSchema<{ id: string }>>(p: {
   pb: PocketBase;
   collectionName: string;
   schema: TSchema;
-  data: Omit<z.infer<TSchema>, "collectionId" | "collectionName" | "id" | "created" | "updated">;
+  data: TCollectionRecordFormData<z.infer<TSchema>>;
 }) => {
   try {
     const resp = await p.pb.collection(p.collectionName).create(p.data);
@@ -20,9 +24,7 @@ export const updateCollectionRecord = async <TSchema extends z.ZodSchema<{ id: s
   pb: PocketBase;
   collectionName: string;
   schema: TSchema;
-  data: Partial<
-    Omit<z.infer<TSchema>, "collectionId" | "collectionName" | "id" | "created" | "updated">
-  > & { id: string };
+  data: Partial<TCollectionRecordFormData<z.infer<TSchema>>> & Pick<z.infer<TSchema>, "id">;
 }) => {
   try {
     const resp = await p.pb.collection(p.collectionName).update(p.data.id, p.data);
