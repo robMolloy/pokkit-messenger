@@ -28,17 +28,20 @@ export const AwaitingApprovalScreen = () => {
             <li>Password: maarten@admin.com</li>
           </ul>
           <p className="mt-2 text-muted-foreground">
-            This isn't the normal way I would do things but to show off what this can do, stay
-            logged in here and open a private/incognito window. You can then click on users and
-            approve yourself. There is also the option to change your role to an admin or to block
-            your user. Everything is built with sockets so the data will update automatically.
+            For best results open the admin window side-by side to your current window. As an admin
+            you can then click on users and change your status to approved or blocked or change your
+            role to admin. Everything is built with realtime updates so your approval and other
+            statuses will update automatically.
           </p>
+          <p className="mt-4 text-muted-foreground">tl;dr</p>
           <p className="mt-2 text-muted-foreground">
-            All the data is disposable so don't worry about it, I'll delete it in a few days.
+            This isn't the normal way I would do things but to show off what this can do, stay
+            logged in here. All the data is disposable so don't worry about messing anything up,
+            I'll delete it all in a few days.
           </p>
           <p className="mt-2 text-muted-foreground">
             Just a reminder that this was just a hobby project and by no means is "done", but there
-            is plenty that I think is good about it.
+            is plenty that I think is good about it and I learned plenty too.
           </p>
 
           {/* <div className="space-y-2 rounded-lg border bg-card p-4 text-sm text-muted-foreground">
