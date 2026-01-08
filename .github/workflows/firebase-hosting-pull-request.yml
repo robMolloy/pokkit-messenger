@@ -21,4 +21,4 @@ jobs:
           projectId: pokkit-messenger
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-          NEXT_PUBLIC_POCKETBASE_URL: https://pokkit.cloud/
+          NEXT_PUBLIC_POCKETBASE_URL: https://pokkit.cloud/db/
