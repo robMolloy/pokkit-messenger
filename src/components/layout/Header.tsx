@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { CustomIcon } from "../CustomIcon";
 import { ThemeToggle } from "../ThemeToggle";
+import { Button } from "../ui/button";
+import { logout } from "@/modules/auth/dbAuthUtils";
+import { pb } from "@/config/pocketbaseConfig";
 
 export function Header() {
   return (
@@ -12,6 +15,10 @@ export function Header() {
         </Link>
 
         <nav className="flex items-center space-x-2">
+          <Button variant="outline" onClick={() => logout({ pb })}>
+            <CustomIcon iconName="LogOut" size="md" />
+            Log Out
+          </Button>
           <ThemeToggle />
         </nav>
       </div>

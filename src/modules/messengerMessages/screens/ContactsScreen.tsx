@@ -36,6 +36,7 @@ export const ContactsScreen = () => {
   return (
     <MainLayout>
       <H1>Contacts</H1>
+      <div>These are all the contacts on the app. TODO: friends only</div>
       <br />
       {(() => {
         if (usersStore.data === undefined) return <div>loading</div>;

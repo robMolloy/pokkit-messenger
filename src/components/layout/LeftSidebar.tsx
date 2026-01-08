@@ -59,23 +59,24 @@ const SidebarButton = (p: {
           onClick={p.onClick}
           disabled={p.disabled}
         >
-          <span className="flex w-full items-center gap-2 text-left">
-            {p.iconName && (
-              <CustomIcon
-                iconName={p.iconName}
-                size="sm"
-                className={p.disabled ? "text-muted-foreground" : ""}
-              />
-            )}
+          <div className="flex w-full justify-between">
+            <span className="flex w-full items-center gap-2 text-left">
+              {p.iconName && (
+                <CustomIcon
+                  iconName={p.iconName}
+                  size="sm"
+                  className={p.disabled ? "text-muted-foreground" : ""}
+                />
+              )}
 
-            {p.children}
-
+              {p.children}
+            </span>
             {p.badgeCount !== undefined && p.badgeCount > 0 && (
-              <span className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-destructive px-2 py-0.5 text-xs text-destructive-foreground">
+              <span className="rounded-full bg-destructive px-2 py-0.5 text-xs text-destructive-foreground">
                 {p.badgeCount}
               </span>
             )}
-          </span>
+          </div>
         </Button>
       </PossibleTooltipWrapper>
     </SidebarButtonWrapper>
