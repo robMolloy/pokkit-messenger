@@ -10,7 +10,7 @@ export const uuid = () => crypto.randomUUID();
 export const safeJsonParse = (p: unknown) => {
   try {
     return { success: true, data: JSON.parse(p as string) } as const;
-  } catch (e) {
+  } catch (_) {
     return { success: false, error: "invalid json" } as const;
   }
 };
