@@ -24,7 +24,7 @@ export const MainFixedLayout = (p: { children: React.ReactNode }) => {
 
 export const Layout = (p: { children: React.ReactNode; showLeftSidebar: boolean }) => {
   return (
-    <div className="flex h-screen max-h-screen flex-col">
+    <div className="flex h-dvh max-h-screen flex-col">
       <Header />
 
       <div className="flex flex-1 overflow-hidden">
