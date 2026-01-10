@@ -55,6 +55,7 @@ export const ChatScreen = (p: { contactId: string }) => {
         return (
           <>
             <Scroll className="flex flex-col gap-3 p-6">
+              {messages.length === 0 && <div>No messages yet...</div>}
               {messages.map((x) => (
                 <ChatMessage
                   key={x.id}

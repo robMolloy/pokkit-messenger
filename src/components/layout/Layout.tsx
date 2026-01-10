@@ -1,6 +1,7 @@
 import { Header } from "./Header";
 import { LeftSidebar } from "./LeftSidebar";
 import { Modal } from "../Modal";
+import { useForceSidebarOpenStore } from "@/stores/useForceSidebarOpenStore";
 
 export const PreserveScrollAbility = (p: {
   children: React.ReactNode;
@@ -23,13 +24,16 @@ export const MainFixedLayout = (p: { children: React.ReactNode }) => {
 };
 
 export const Layout = (p: { children: React.ReactNode; showLeftSidebar: boolean }) => {
+  const forceSidebarOpenStore = useForceSidebarOpenStore();
   return (
     <div className="flex h-dvh max-h-screen flex-col">
       <Header />
 
       <div className="flex flex-1 overflow-hidden">
         {p.showLeftSidebar && (
-          <PreserveScrollAbility className="w-64">
+          <PreserveScrollAbility
+            className={`w-64 ${forceSidebarOpenStore.data ? "hidden md:flex" : ""}`}
+          >
             <LeftSidebar />
           </PreserveScrollAbility>
         )}

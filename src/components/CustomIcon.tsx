@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import {
+  MenuIcon,
   Mail,
   Ban,
   Clock,
@@ -42,6 +43,7 @@ import {
 } from "lucide-react";
 
 const iconMap = {
+  MenuIcon,
   Mail,
   Ban,
   Clock,
