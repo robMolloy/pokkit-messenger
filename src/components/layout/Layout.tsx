@@ -32,7 +32,7 @@ export const Layout = (p: { children: React.ReactNode; showLeftSidebar: boolean 
       <div className="flex flex-1 overflow-hidden">
         {p.showLeftSidebar && (
           <PreserveScrollAbility
-            className={`w-64 ${forceSidebarOpenStore.data ? "hidden md:flex" : ""}`}
+            className={`w-64 ${forceSidebarOpenStore.data ? "" : "hidden md:flex"}`}
           >
             <LeftSidebar />
           </PreserveScrollAbility>
